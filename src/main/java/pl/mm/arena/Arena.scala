@@ -12,6 +12,7 @@ object Arena {
   val ENEMY = "E"
   val WALL = "W"
   val FREE_SPACE = "o"
+  val TRANSPARENT_OBJECTS = FREE_SPACE  
 
   val MIN_MAP_WIDTH = 5
   val MAX_MAP_WIDTH = 50
@@ -53,5 +54,5 @@ class Arena(aBoard: String) {
     result.toList
   }
 
-  def maxVisibleAreaFrom(direction: Direction, pos: Position): String = VisibleAreaPreparer(direction).prepareFullView(board, pos)
+  def prepareVisibleArea(direction: Direction, pos: Position): String = VisibleAreaPreparer(direction).prepareVisibleArea(board, pos)
 }

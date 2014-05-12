@@ -58,7 +58,7 @@ class Engine(arena: Arena) {
   }
   
   private def look(state: BotState): String = {
-    SightUpgrades.look(arena.maxVisibleAreaFrom(state.direction,state.position), state.sightUpgrade)
+    SightUpgrades.look(arena.prepareVisibleArea(state.direction,state.position), state.sightUpgrade)
     ""
   }
 

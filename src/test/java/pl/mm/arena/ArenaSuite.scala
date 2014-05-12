@@ -48,7 +48,7 @@ class ArenaSuite extends FunSuite {
          ooWoooWoo""".lines map (_.trim()) mkString ("\n") 
        
      arena.startingPositions.foreach{ case(direction, position) =>
-       assert(arena.maxVisibleAreaFrom(direction, position)==expectedView)
+       assert(arena.prepareVisibleArea(direction, position)==expectedView)
      } 
   }
 
@@ -75,7 +75,7 @@ class ArenaSuite extends FunSuite {
          ooooooooo""".lines map (_.trim()) mkString ("\n") 
 
      arena.startingPositions.foreach{ case(direction, position) =>
-       assert(arena.maxVisibleAreaFrom(direction, position)==expectedView)
+       assert(arena.prepareVisibleArea(direction, position)==expectedView)
      } 
   }
 

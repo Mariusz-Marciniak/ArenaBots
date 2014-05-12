@@ -1,10 +1,10 @@
 package pl.mm.arena
 
 object VisibleAreaPreparer {
-  lazy val left = new FacingLeftVisibleAreaPreparer
-  lazy val right = new FacingRightVisibleAreaPreparer
-  lazy val top = new FacingTopVisibleAreaPreparer
-  lazy val bottom = new FacingBottomVisibleAreaPreparer
+  lazy val left = FacingLeftVisibleAreaPreparer
+  lazy val right = FacingRightVisibleAreaPreparer
+  lazy val top = FacingTopVisibleAreaPreparer
+  lazy val bottom = FacingBottomVisibleAreaPreparer
 
   def apply(direction: Direction): VisibleAreaPreparer = direction match {
     case Arena.LEFT => left
@@ -19,7 +19,7 @@ abstract class VisibleAreaPreparer(rowOffset: Int, colOffset: Int) {
 
   protected def rotate(croppedBoard: IndexedSeq[String]): IndexedSeq[String]
 
-  def prepareFullView(entireBoard: List[String], position: Position): String = {
+  def prepareVisibleArea(entireBoard: List[String], position: Position): String = {
 
     def cropToMaxVisibleArea(fromRow: Int, fromCol: Int): IndexedSeq[String] = {
       val boardWidth = entireBoard(0).size
@@ -57,7 +57,7 @@ abstract class VisibleAreaPreparer(rowOffset: Int, colOffset: Int) {
       }
     }
 
-    def replaceUsersMarks(croppedBoard: IndexedSeq[String]) = {
+    def replacePlayersMarkers(croppedBoard: IndexedSeq[String]) = {
 
       def indicateEnemyInLine(line: String): String = line.replaceAll("[" + Arena.STARTING_POSITION + "]", Arena.ENEMY)
 
@@ -72,7 +72,7 @@ abstract class VisibleAreaPreparer(rowOffset: Int, colOffset: Int) {
       }
     }
 
-    replaceUsersMarks(rotate(cropToMaxVisibleArea(position._1 + rowOffset, position._2 + colOffset))) mkString ("\n")
+    replacePlayersMarkers(rotate(cropToMaxVisibleArea(position._1 + rowOffset, position._2 + colOffset))) mkString ("\n")
   }
 
   def validate(entireMap: String): Boolean = {
@@ -88,26 +88,30 @@ abstract class VisibleAreaPreparer(rowOffset: Int, colOffset: Int) {
 
 }
 
-case class FacingTopVisibleAreaPreparer extends VisibleAreaPreparer(-6, -4) {
+case object FacingTopVisibleAreaPreparer extends VisibleAreaPreparer(-6, -4) {
   def rotate(croppedBoard: IndexedSeq[String]): IndexedSeq[String] = {
     croppedBoard
   }
 }
 
-case class FacingBottomVisibleAreaPreparer extends VisibleAreaPreparer(-2, -4) {
+case object FacingBottomVisibleAreaPreparer extends VisibleAreaPreparer(-2, -4) {
   def rotate(croppedBoard: IndexedSeq[String]): IndexedSeq[String] = {
     croppedBoard.reverse map (_.reverse)
   }
 }
 
-case class FacingLeftVisibleAreaPreparer extends VisibleAreaPreparer(-4, -6) {
+case object FacingLeftVisibleAreaPreparer extends VisibleAreaPreparer(-4, -6) {
   def rotate(croppedBoard: IndexedSeq[String]): IndexedSeq[String] = {
     croppedBoard.indices map { case index => croppedBoard.foldLeft("") { case (charInLine, result) => result(index) +: charInLine } }
   }
 }
 
-case class FacingRightVisibleAreaPreparer extends VisibleAreaPreparer(-4, -2) {
+case object FacingRightVisibleAreaPreparer extends VisibleAreaPreparer(-4, -2) {
   def rotate(croppedBoard: IndexedSeq[String]): IndexedSeq[String] = {
     (croppedBoard.size - 1 to 0 by -1) map { case index => croppedBoard.foldLeft("")(_ + _(index)) }
   }
+}
+
+class VisibleArea {
+  
 }

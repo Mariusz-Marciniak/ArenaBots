@@ -45,7 +45,7 @@ class UpgradeSuite extends FunSuite {
          xxx456xxx
          xxxxxxxxx
          xxxxxxxxx"""
-    val sight = SightUpgrades.look(mapSlice, SightUpgrade("Misty lens", 0, SightUpgrades.cleanLensVisibility))
+    val sight = SightUpgrades.look(mapSlice, SightUpgrade("Clean lens", 0, SightUpgrades.cleanLensVisibility))
     assert(sight.lines.size == expectedSight.lines.size)
     val zipped = sight.lines zip expectedSight.lines
     for ((line, expected) <- zipped) assert(line == expected.trim)
@@ -62,10 +62,10 @@ class UpgradeSuite extends FunSuite {
          xx34567xx
          xx34567xx
          xxxxxxxxx"""
-    val sight = SightUpgrades.look(mapSlice, SightUpgrade("Misty lens", 0, SightUpgrades.shortRadarVisibility))
+    val sight = SightUpgrades.look(mapSlice, SightUpgrade("Short radar", 0, SightUpgrades.shortRadarVisibility))
     assert(sight.lines.size == expectedSight.lines.size)
     val zipped = sight.lines zip expectedSight.lines
     for ((line, expected) <- zipped) assert(line == expected.trim)
   }
-
+  
 }
