@@ -5,9 +5,7 @@ object Bot {
 }
 
 class Bot(botName:String) {
-  
   val name = this.botName
-    
 }
 
 trait BotHandler {

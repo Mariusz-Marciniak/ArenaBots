@@ -3,14 +3,14 @@ package pl.mm.arena
 import scala.util.Either
 
 object Engine {
-  val INITIAL_ENERGY = 100
+  val InitialEnergy = 100
 
   def apply(arena: Arena) = new Engine(arena)
   def apply(map: String) = new Engine(Arena(map))
 
-  class EngineException extends RuntimeException
-  case class InvalidOperationException extends EngineException
-  case class NotEnoughPlayersException extends EngineException
+  class EngineException() extends RuntimeException
+  case class InvalidOperationException() extends EngineException
+  case class NotEnoughPlayersException() extends EngineException
   case class TooManyPlayersException(playersAllowed: Int) extends EngineException
 
     class EngineBot private[Engine] (engine: Engine, state: BotState) extends BotHandler {
@@ -21,7 +21,7 @@ object Engine {
   }
   
   class BotState private [Engine] (name: String, positionWithDirection: Tuple2[Direction,Position]) {
-    val energy = INITIAL_ENERGY
+    val energy = InitialEnergy
     
     val sightUpgrade = SightUpgrades.default
     

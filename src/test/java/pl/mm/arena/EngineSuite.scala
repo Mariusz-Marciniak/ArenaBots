@@ -28,7 +28,7 @@ class EngineSuite extends FunSuite {
       assert(engine.login(List(Bot("Tom"), Bot("Jack"), Bot("Ana"))) == Left(new Engine.TooManyPlayersException(2)))
       assert(engine.login(List(Bot("Tom"), Bot("Jack"))) match { 
           case Right(list) => list forall {
-            handler => handler.energy == Engine.INITIAL_ENERGY  
+            handler => handler.energy == Engine.InitialEnergy
           }
           case Left(_) => false
         }

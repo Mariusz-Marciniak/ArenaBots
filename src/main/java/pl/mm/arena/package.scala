@@ -1,6 +1,5 @@
 package pl.mm
 
-import scala.collection.mutable.ListBuffer
 import scala.util.Random
 package object arena {
   type Position = (Int,Int)  // row, col
