@@ -36,7 +36,7 @@ class EngineSuite extends FunSuite {
     }
     
     test("list should be able to shuffle elements") {
-      val l : List[Int] = (0 to 100) toList
+      val l : List[Int] = (0 to 100).toList
       val shuffledOne = l.shuffle
       val shuffledTwo = l.shuffle
       assert(l.size == shuffledOne.size)

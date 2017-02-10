@@ -8,7 +8,7 @@ package object arena {
   implicit class ListOps[T](val l: List[T]) extends AnyVal {
     def shuffle : List[T] = {
       val indexedList = l map {v => (Random.nextInt,v)}
-      (indexedList.sortBy {case (i,v) => i} unzip)._2  
+      (indexedList.sortBy {case (i,v) => i}.unzip)._2  
     }
   }
 }
